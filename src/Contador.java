@@ -1,15 +1,27 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+public class Contador {
+    public static void main(String[] args) throws ParametrosInvalidosException {
+        Scanner terminal = new Scanner(System.in);
+        System.out.println("Digite o primeiro parâmetro: ");
+        int parametroUm = terminal.nextInt();
+        System.out.println("Digite o segundo parâmetro: ");
+        int parametroDois = terminal.nextInt();
+
+        try {
+            int contar = contar(parametroUm, parametroDois);
+            for (int i = 0; i <= contar; i++) {
+                System.out.println("Imprimindo numero " + (i+1));
+            }
+        } catch (ParametrosInvalidosException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    static int contar(int parametroUm, int parametroDois) throws ParametrosInvalidosException {
+        if (parametroUm > parametroDois) {
+            throw new ParametrosInvalidosException("O segundo parâmetro deve ser maior que o primeiro");
+        }
+        return parametroDois - parametroUm;
     }
 }
